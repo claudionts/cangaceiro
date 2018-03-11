@@ -1,12 +1,4 @@
-class NegociacoesView {
-
-    constructor(seletor) {
-        this._elemento = document.querySelector(seletor);
-    }
-
-    update(model) {
-        this._elemento.innerHTML = this.template(model);
-    }
+class NegociacoesView extends View {
 
     template(model) {
         return `
@@ -41,4 +33,5 @@ class NegociacoesView {
         </table>
         `
     }
+
 }
