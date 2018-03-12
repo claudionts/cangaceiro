@@ -29,12 +29,19 @@ class NegociacaoController {
         this._inputData.focus();
     }
 
-    _criaNegociacao(){
+    _criaNegociacao() {
         return new Negociacao(
             DateConverter.paraData(this._inputData.value),
             parseInt(this._inputQuantidade.value),
             parseFloat(this._inputValor.value)
         );
+    }
+
+    apaga() {
+        this._negociacoes.esvazia();
+        this._negociacoesView.update(this._negociacoes);
+        this._mensagem.texto = 'Negociações apagadas com sucesso';
+        this._mensagemView.update(this._mensagem);
     }
 
 }
