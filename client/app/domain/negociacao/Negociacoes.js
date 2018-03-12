@@ -19,7 +19,7 @@ class Negociacoes {
     }
 
     esvazia() {
-        this._negociacoes = [];
+        this._negociacoes.length = 0;
     }
 
 }
