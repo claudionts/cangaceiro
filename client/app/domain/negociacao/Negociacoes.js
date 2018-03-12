@@ -1,15 +1,13 @@
 class Negociacoes {
-    constructor(contexto, armadilha) {
+    constructor(armadilha) {
         this._negociacoes = [];
         this._armadilha = armadilha;
-        this._contexto = contexto;
         Object.freeze(this);
     }
 
     adiciona(negociacao) {
         this._negociacoes.push(negociacao);
-        //Método call passa em qual contexto sera executado a função
-        this._armadilha.call(this._contexto, this); //Passa o contexto de NegociacaoController.js e também o contexto de Negociacoes.js(Model)
+        this._armadilha(this);
     }
 
     paraArray() {
@@ -24,7 +22,7 @@ class Negociacoes {
 
     esvazia() {
         this._negociacoes.length = 0;
-        this._armadilha.call(this._contexto, this);//Passa o contexto de NegociacaoController.js e também o contexto de Negociacoes.js(Model)
+        this._armadilha(this);
     }
 
 }
