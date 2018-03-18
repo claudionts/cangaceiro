@@ -2,7 +2,7 @@ class ProxyFactory {
     static create (objeto, props, armadilha) {
         return new Proxy(objeto, {
             get(target, prop, receiver) {
-                if(typeof(target[prop]) == typeof(Function) && props.includes(prop)) {
+                if(ProxyFactory._ehFuncao(target[prop]) && props.includes(prop)) {
                     return function() {
                         console.log(`"${prop}" disparou a armadilha`);
                         target[prop].apply(target, arguments);//executa a função no contexto do objeto
@@ -19,5 +19,9 @@ class ProxyFactory {
                 return updated;
             }
         });
+    }
+
+    static _ehFuncao(fn) {
+        return typeof(fn) == typeof(Function);
     }
 }
