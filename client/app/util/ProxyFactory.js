@@ -2,8 +2,7 @@ class ProxyFactory {
     static create (objeto, props, armadilha) {
         return new Proxy(objeto, {
             get(target, prop, receiver) {
-                if(typeof(target[prop]) == typeof(Function) && ['adiciona', 'esvazia']
-                .includes(prop)) {
+                if(typeof(target[prop]) == typeof(Function) && props.includes(prop)) {
                     return function() {
                         console.log(`"${prop}" disparou a armadilha`);
                         target[prop].apply(target, arguments);//executa a função no contexto do objeto
@@ -12,6 +11,12 @@ class ProxyFactory {
                 } else {
                     return target[prop];
                 }
+            },
+            set(target, prop, value, receiver) {
+                const updated = Reflect.set(target, prop, value);
+                if(props.includes(prop)) armadilha(target);
+
+                return updated;
             }
         });
     }

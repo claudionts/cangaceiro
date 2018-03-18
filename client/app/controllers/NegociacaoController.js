@@ -5,10 +5,9 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
-        
-        const self = this;
+    
         this._negociacoes = ProxyFactory.create(
-            new NegociacoesView(),
+            new Negociacoes(),
             ['adiciona', 'esvazia'],
             model => this._negociacoesView.update(model)
         );
